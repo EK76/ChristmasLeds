@@ -16,7 +16,7 @@ This project consist of
 - 2 3watt speakers
 - Push button
 - 9 RGB LEDs
-- 9 330 Ohm resistors that are connected to RGB leds
+- 9 330 Ohm resistors that are connected to RGB leds.
 - 1k Ohm resistor
 - Jumpwires
 
@@ -29,5 +29,3 @@ This project consist of
 - Arduino Mega's pin 10 is connected to DFMini player according the yellow wire.
 - Arduino Mega's pin 11 is connected to DFMini player according the green wire.
 - Connect DFMini player to PAM8403 Audio amplifire according the blue wire.
-  
- #### **A video, which show how this project works in realtime.**
