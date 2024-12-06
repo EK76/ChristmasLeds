@@ -3,16 +3,16 @@
 
 
 int randomNumbers[] = {1700, 2000, 2300, 2500, 2800, 3000};
-int blueLeds[] = {22, 25, 28};
-int redLeds[] = {23, 26, 29};
-int greenLeds[] = {24, 27, 30};
+int blueLeds[] = {22, 25, 28, 49, 34, 37, 40, 43, 46};
+int redLeds[] = {23, 26, 29, 32, 35, 38, 41, 50, 47};
+int greenLeds[] = {24, 27, 30, 33, 36, 39, 42, 45, 48};
 
-  //Create the UART connection to the module
+int blueLed[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+int redLed[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+int greenLed[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
 SoftwareSerial softwareSerial(10,11);
 DFRobotDFPlayerMini myPlayer;
-
-
 
 int moveDetection = 19; 
 int selection = 18;
@@ -29,6 +29,30 @@ int blueLed3 = 28;
 int redLed3 = 29;
 int greenLed3 = 30;
 
+int blueLed4 = 49;
+int redLed4 = 32;
+int greenLed4 = 33;
+
+int blueLed5 = 34;
+int redLed5 = 35;
+int greenLed5 = 36;
+
+int blueLed6 = 37;
+int redLed6 = 38;
+int greenLed6 = 39;
+
+int blueLed7 = 40;
+int redLed7 = 41;
+int greenLed7 = 42;
+
+int blueLed8 = 43;
+int redLed8 = 50;
+int greenLed8 = 45;
+
+int blueLed9 = 46;
+int redLed9 = 47;
+int greenLed9 = 48;
+
 int setPeriod = 2000;
 int period;
 int stopTimer = 0;
@@ -38,7 +62,6 @@ bool detection = false;
 int changeValue = 0;
 int counter = 0;
 
-
 unsigned long time_now = 0;
 long randomNumber, randomNumber2, choiceValue;
 
@@ -47,6 +70,7 @@ void setup()
   Serial.begin(9600);
   softwareSerial.begin(9600);
   pinMode(moveDetection,INPUT_PULLUP);
+  pinMode(selection,INPUT_PULLUP);
 
   pinMode(blueLed1, OUTPUT);
   pinMode(redLed1, OUTPUT);
@@ -60,9 +84,33 @@ void setup()
   pinMode(redLed3, OUTPUT);
   pinMode(greenLed3, OUTPUT);
 
+  pinMode(blueLed4, OUTPUT);
+  pinMode(redLed4, OUTPUT);
+  pinMode(greenLed4, OUTPUT);
+
+  pinMode(blueLed5, OUTPUT);
+  pinMode(redLed5, OUTPUT);
+  pinMode(greenLed5, OUTPUT);
+
+  pinMode(blueLed6, OUTPUT);
+  pinMode(redLed6, OUTPUT);
+  pinMode(greenLed6, OUTPUT);
+
+  pinMode(blueLed7, OUTPUT);
+  pinMode(redLed7, OUTPUT);
+  pinMode(greenLed7, OUTPUT);
+
+  pinMode(blueLed8, OUTPUT);
+  pinMode(redLed8, OUTPUT);
+  pinMode(greenLed8, OUTPUT);
+
+  pinMode(blueLed9, OUTPUT);
+  pinMode(redLed9, OUTPUT);
+  pinMode(greenLed9, OUTPUT); 
+
   softwareSerial.begin(9600);
   myPlayer.begin(softwareSerial); 
-  myPlayer.volume(10);
+  myPlayer.volume(26);
     
   attachInterrupt(digitalPinToInterrupt(moveDetection), interuptPin, CHANGE); 
   attachInterrupt(digitalPinToInterrupt(selection), interuptPin2, RISING); 
@@ -89,7 +137,7 @@ void loop() {
   {
     beginOver = false;
     // Blue
-    for (int i = 0; i < 3; i++){
+    for (int i = 0; i < 9; i++){
       digitalWrite(blueLeds[i], HIGH);
       digitalWrite(redLeds[i],LOW);
       digitalWrite(greenLeds[i],LOW);
@@ -101,33 +149,21 @@ void loop() {
   {
    randomNumber = random(1,7);
     period = randomNumbers[randomNumber];
-
-            Serial.print("Delay: ");
-      Serial.println(randomNumbers[randomNumber]);
-
     choiceValue = random(1,7);
-   
-
-     Serial.print("Random: ");
-     Serial.println(randomNumber2);
-
     switch(choiceValue)
     {
       case 1:
-     // Blue
       randomNumber2 = random(1,4);
         digitalWrite(blueLeds[randomNumber2], HIGH);
         digitalWrite(redLeds[randomNumber2], LOW);
         digitalWrite(greenLeds[randomNumber2], LOW);
 
       case 2: 
-    // Red
      randomNumber2 = random(1,4);
        digitalWrite(blueLeds[randomNumber2], LOW);
        digitalWrite(redLeds[randomNumber2], HIGH);
-       digitalWrite(greenLeds[randomNumber2], LOW);   
-   
-  //Green
+       digitalWrite(greenLeds[randomNumber2], LOW);    
+
       case 3:
        randomNumber2 = random(1,4);
         digitalWrite(blueLeds[randomNumber2], LOW);
@@ -152,14 +188,6 @@ void loop() {
         digitalWrite(redLeds[randomNumber2], HIGH);  
         digitalWrite(greenLeds[randomNumber2], LOW);
     }
-    Serial.print("Choichvalue: ");
-     Serial.println(choiceValue);
-        Serial.print("Blue: ");
-      Serial.println(blueLeds[randomNumber2]);
-     Serial.print("Red: ");
-      Serial.println(redLeds[randomNumber2]);
-         Serial.print("Green: ");
-      Serial.println(greenLeds[randomNumber2]);
      delayTime();
   }
   else
@@ -168,7 +196,7 @@ void loop() {
      switch(randomNumber)
      {
        case 1:
-       for (int i = 0; i < 3; i++)
+       for (int i = 0; i < 9; i++)
        {
         digitalWrite(blueLeds[i], HIGH);
         digitalWrite(redLeds[i], LOW);
@@ -177,7 +205,7 @@ void loop() {
        break;
 
        case 2:
-       for (int i = 0; i < 3; i++)
+       for (int i = 0; i < 9; i++)
        {
         digitalWrite(blueLeds[i], LOW);
         digitalWrite(redLeds[i], HIGH);
@@ -186,7 +214,7 @@ void loop() {
        break;
 
        case 3:
-       for (int i = 0; i < 3; i++)
+       for (int i = 0; i < 9; i++)
        {
         digitalWrite(blueLeds[i], LOW);
         digitalWrite(redLeds[i], LOW);
@@ -195,7 +223,7 @@ void loop() {
        break; 
 
        case 4:
-       for (int i = 0; i < 3; i++)
+       for (int i = 0; i < 9; i++)
        {
         digitalWrite(blueLeds[i], LOW);
         digitalWrite(redLeds[i], HIGH);
@@ -204,7 +232,7 @@ void loop() {
        break; 
 
        case 5:
-       for (int i = 0; i < 3; i++)
+       for (int i = 0; i < 9; i++)
        {
         digitalWrite(blueLeds[i], HIGH);
         digitalWrite(redLeds[i], LOW);
@@ -213,12 +241,11 @@ void loop() {
        break; 
       
       case 6:
-       for (int i = 0; i < 3; i++)
+       for (int i = 0; i < 9; i++)
        {
         digitalWrite(blueLeds[i], HIGH);
         digitalWrite(redLeds[i], HIGH);
         digitalWrite(greenLeds[i], LOW);
-          Serial.println(greenLeds[i]);
        }
        break; 
      }
@@ -231,12 +258,38 @@ void loop() {
     digitalWrite(22, LOW);
     digitalWrite(23, HIGH);
     digitalWrite(24, LOW);
+    
     digitalWrite(25, LOW);
     digitalWrite(26, HIGH);
     digitalWrite(27, LOW);
+    
     digitalWrite(28, LOW);
     digitalWrite(29, HIGH);
     digitalWrite(30, LOW);
+    
+    digitalWrite(49, LOW);
+    digitalWrite(32, HIGH);
+    digitalWrite(33, LOW);
+    
+    digitalWrite(34, LOW);
+    digitalWrite(35, HIGH);
+    digitalWrite(36, LOW);
+
+    digitalWrite(37, LOW);
+    digitalWrite(38, HIGH);
+    digitalWrite(39, LOW);
+
+    digitalWrite(40, LOW);
+    digitalWrite(41, HIGH);
+    digitalWrite(42, LOW);
+
+    digitalWrite(43, LOW);
+    digitalWrite(50, HIGH);
+    digitalWrite(45, LOW);
+
+    digitalWrite(46, LOW);
+    digitalWrite(47, HIGH);
+    digitalWrite(48, LOW);
 
     Serial.println("Test1");
     myPlayer.play(1);
