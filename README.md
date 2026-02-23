@@ -1,34 +1,21 @@
 # Christmas Leds
-Christmas Leds is a Arduino project, whose RGB leds can be uses for example as a Christmas decorative lighting, which the project's name refers to.
-It also conist of small speaker which can play MP3 songs.
-
+Christmas Leds is a Arduino project, whose leds can be uses for example as a Christmas decorative lighting, which the project's name refers to.
 The code is written in C++ programming language with the Arduino IDE complitator. You can find more info about Arduino IDE from this link.
 https://www.arduino.cc/en/software
 
 This project consist of
-- Arduino Mega 2560
-- DFMini player
-- PAM8403 Audio amplifire
-- 2 pcs 3watt speakers
+- Arduino Uno (in my case) or any other Arduino board of your choosing.
 - Push button
-- 9 pcs RGB LEDs
-- 9 pcs 330 Ohm resistors that are connected to RGB leds.
-- 1k Ohm resistor
+- 5 pcs red leds (in my case) or any other color of your choosing.
+- 5 pcs 330 Ohm resistors that are connected to leds.
 - Jumpwires
   
-Pushbutton's purpose is to switch between two diiferent led funtions, which are
+Pushbutton's purpose is to switch between three diiferent led funtions, which are
 - Random blinking leds
 - Running leds
-  
-Movedetection sensor's task is to sense when a person approaching to a certain distance and then send a signal to DFMini player to play a MP3 song
-of your choosing. 
 
 ## Schematics
-![image](https://github.com/user-attachments/assets/c6226249-231a-4ef6-a6ad-85058707638c)
+<img width="580" height="350" alt="image" src="https://github.com/user-attachments/assets/934402df-6194-442b-a7eb-08290e66a82a" />
 
-- RGG LEds are connected to the pins between 22 and 48.
-- Push button is connected to pin 18.
-- Movedetection sensor is connected to pin 19.
-- Arduino Mega's pin 10 is connected to DFMini player according the yellow wire.
-- Arduino Mega's pin 11 is connected to DFMini player according the green wire.
-- Connect DFMini player is connected to PAM8403 Audio amplifire according the blue wire.
+- Leds are connected to the pins 3,5,6,9 and 10.
+- Push button is connected to pin 2.
