@@ -3,10 +3,10 @@ int redLeds[] = {11, 5, 6, 9, 10};
 int period=5000;
 int period2=20;
 int period3=1500;
-int counter = 0;
-int counter2 = 0;
+volatile int counter = 0;
+volatile int counter2 = 0;
+volatile int changeValue = 1;
 int ledCounter=1;
-int changeValue = 1;
 long randomNumber;
 bool checkOnce = false;
 unsigned long time_now = 0;
@@ -15,6 +15,7 @@ unsigned long time_now3 = 0;
 
 void setup() {
   Serial.begin(115200);
+  randomSeed(analogRead(0));
   delay(500);
   pinMode(3, OUTPUT);
   pinMode(5, OUTPUT);
@@ -175,7 +176,7 @@ void loop()
       ledCounter++;
       break;     
   }
- Serial.println(period);
+  Serial.println(period);
   Serial.println(changeValue);
 }
 
@@ -201,7 +202,7 @@ void choiceValue()
       changeValue=3;
       counter=0;
       digitalWrite(8, HIGH);
-      digitalWrite(12, HIGH);
+      digitalWrite(12, HIGH;
       break;
   }  
   return;
@@ -213,13 +214,11 @@ void choiceValue()
   switch(counter2)
   {
     case 1:
-    delay(100);
       period=1500;
-       digitalWrite(4, HIGH);
+      digitalWrite(4, HIGH);
       break;
 
     case 2:
-    delay(100);
       period=5000;
       counter2=0;
       digitalWrite(4, LOW);
