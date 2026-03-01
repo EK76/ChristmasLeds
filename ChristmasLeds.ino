@@ -1,15 +1,13 @@
-include <SoftwareSerial.h>
-int redLeds[] = {3, 5, 6, 9, 10}; 
-int period=3000;
+#include <SoftwareSerial.h>
+int redLeds[] = {11, 5, 6, 9, 10}; 
+int period=5000;
 int period2=20;
-int period3=1000;
-int stopTimer = 0;
-int stopTimer2 = 0;
-int stopTimer3 = 0;
-int counter=0;
+int period3=1500;
+int counter = 0;
+int counter2 = 0;
 int ledCounter=1;
 int changeValue = 1;
-long randomNumber, choiceValue;
+long randomNumber;
 bool checkOnce = false;
 unsigned long time_now = 0;
 unsigned long time_now2 = 0;
@@ -23,47 +21,33 @@ void setup() {
   pinMode(6, OUTPUT);
   pinMode(9, OUTPUT);
   pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
   pinMode(2, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(2), choice, RISING);
+  pinMode(3, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(2), choiceValue, RISING);
+  attachInterrupt(digitalPinToInterrupt(3), delayValue, RISING);
+  digitalWrite(4, LOW);
+  digitalWrite(8, HIGH);
+  digitalWrite(12, LOW);
 }
 
 void delayTime()
 { 
    time_now = millis();
-   while(millis() - time_now < period){
-     if (stopTimer == 1)
-     {
-          period = 0;
-          stopTimer = 0;
-          break;
-      }   
-   } 
+   while(millis() - time_now < period){}
 }
 
 void delayTime2()
 { 
    time_now2 = millis();
-   while(millis() - time_now2 < period2){
-     if (stopTimer2 == 1)
-     {
-          period2 = 0;
-          stopTimer2 = 0;
-          break;
-      }   
-   } 
+   while(millis() - time_now2 < period2){} 
 }
 
 void delayTime3()
 { 
    time_now3 = millis();
-   while(millis() - time_now3 < period3){
-     if (stopTimer3 == 1)
-     {
-          period3 = 0;
-          stopTimer3 = 0;
-          break;
-      }   
-   } 
+   while(millis() - time_now3 < period3){} 
 }
 
 void loop() 
@@ -71,12 +55,13 @@ void loop()
   if (checkOnce == true)
   {
     checkOnce = false;
-    pinMode(3, OUTPUT);
+
     pinMode(5, OUTPUT);
     pinMode(6, OUTPUT);
     pinMode(9, OUTPUT);
     pinMode(10, OUTPUT);
-    pinMode(2, INPUT_PULLUP);
+    pinMode(11, OUTPUT);
+
     Serial.println("TRUE");
   }
   switch(changeValue)
@@ -190,29 +175,54 @@ void loop()
       ledCounter++;
       break;     
   }
+ Serial.println(period);
   Serial.println(changeValue);
 }
 
-void choice()
+void choiceValue()
 {
   counter++;
   switch(counter)
   {
     case 1:
       changeValue=1;
+      digitalWrite(8, HIGH);
+     digitalWrite(12, LOW);
       break;
 
     case 2:
       changeValue=2;
       checkOnce = true;   
+      digitalWrite(8, LOW);
+      digitalWrite(12, HIGH);
       break;
     
     case 3:
       changeValue=3;
+      counter=0;
+      digitalWrite(8, HIGH);
+      digitalWrite(12, HIGH);
+      break;
+  }  
+  return;
+}
+
+ void delayValue()
+{
+  counter2++;
+  switch(counter2)
+  {
+    case 1:
+    delay(100);
+      period=1500;
+       digitalWrite(4, HIGH);
       break;
 
-    case 4:
-      counter=0;
+    case 2:
+    delay(100);
+      period=5000;
+      counter2=0;
+      digitalWrite(4, LOW);
       break;
-  }    
+  }
 }
