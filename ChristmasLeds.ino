@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
 int redLeds[] = {11, 5, 6, 9, 10}; 
-int period=5000;
+volatile int period=5000;
 int period2=20;
 int period3=1500;
 volatile int counter = 0;
@@ -17,17 +17,18 @@ void setup() {
   Serial.begin(115200);
   randomSeed(analogRead(0));
   delay(500);
-  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
+  pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(11, OUTPUT);
   pinMode(12, OUTPUT);
   pinMode(2, INPUT_PULLUP);
   pinMode(3, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(2), choiceValue, RISING);
-  attachInterrupt(digitalPinToInterrupt(3), delayValue, RISING);
+  attachInterrupt(digitalPinToInterrupt(2), choiceValue, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(3), delayValue, CHANGE);
   digitalWrite(4, LOW);
   digitalWrite(8, HIGH);
   digitalWrite(12, LOW);
@@ -188,7 +189,7 @@ void choiceValue()
     case 1:
       changeValue=1;
       digitalWrite(8, HIGH);
-     digitalWrite(12, LOW);
+      digitalWrite(12, LOW);
       break;
 
     case 2:
@@ -202,10 +203,9 @@ void choiceValue()
       changeValue=3;
       counter=0;
       digitalWrite(8, HIGH);
-      digitalWrite(12, HIGH;
+      digitalWrite(12, HIGH);
       break;
   }  
-  return;
 }
 
  void delayValue()
