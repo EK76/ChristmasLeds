@@ -29,4 +29,4 @@ and when led is in off mode the delay value is 5 seconds.
 <img width="580" height="350" alt="image" src="https://github.com/user-attachments/assets/934402df-6194-442b-a7eb-08290e66a82a" />
 
 - Leds are connected to the pins 4,5,6,8,9,10,11 and 12.
-- Push button is connected to pin 2 and 3 (workings as interrupts).
+- Push buttons are connected to pin 2 and 3 (workings as interrupts).
