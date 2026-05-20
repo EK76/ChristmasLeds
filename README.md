@@ -5,28 +5,22 @@ https://www.arduino.cc/en/software.
 
 This project consist of
 - Arduino Uno (in my case) or any other Arduino board of your choosing.
-- 2 pcs push buttons
+- 1 pcs push buttons
 - 5 pcs red leds (in my case) or any other color of your choosing for the decorative lighting.
-- 1 pcs orange led (indicating status of the delay value).
 - 1 psc RGB led (indicating status of the decorative lighting).
 - 7 pcs 330 Ohm resistors that are connected to leds.
-- Jump wires
   
-The first pushbutton's purpose is to switch between three diiferent led funtions, which are
-- Running leds (RGB status led is blue).
-- Fadings leds (RGB status led is red).
-- Random blinking leds (RGB status led is purple).
-
-And second pushbutton's purpose is to switch between delay values, which are.
-- 1.5 seconds
-- 5 seconds
-  
-In my case the delay values are 1.5 seconds and 5 seconds. Byt you can in the code
-choose your own values. When orange led is on, it means the delay value is 1.5 seconds
-and when led is in off mode the delay value is 5 seconds.
+The pushbutton's purpose is to switch between three diiferent led funtions, which are
+- Running leds.
+- Fadings leds.
+- Random blinking leds.
 
 ## Schematics
 <img width="580" height="350" alt="image" src="https://github.com/user-attachments/assets/934402df-6194-442b-a7eb-08290e66a82a" />
 
-- Leds are connected to the pins 4,5,6,8,9,10,11 and 12.
-- Push button is connected to pin 2 and 3 (workings as interrupts).
+- Leds are connected to the pins 5,6,9,10 and 11.
+- Rgb led are connected to pin 8 and 12.
+- Push button is connected to pin 2 (workings as an interrupt).
+
+An Arduino interrupt is a hardware mechanism that pauses your main program's execution to immediately run a specific, high-priority chunk of code. 
+It ensures your board reacts instantly to events (like a button press or sensor trigger) without the lag or missed signals associated with constant polling.
