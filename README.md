@@ -9,7 +9,9 @@ This project consist of
 - 5 pcs red leds (in my case) or any other color of your choosing for the decorative lighting.
 - 1 psc RGB led (indicating status of the decorative lighting).
 - 7 pcs 330 Ohm resistors that are connected to leds.
-  
+
+#### By modifing the code you add more "decorative" leds to this project.
+
 The pushbutton's purpose is to switch between three diiferent led funtions, which are
 - Running leds.
 - Fadings leds.
