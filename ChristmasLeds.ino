@@ -1,7 +1,10 @@
+#include <DFRobotDFPlayerMini.h>
 #include <SoftwareSerial.h>
+SoftwareSerial mySerial(0,1);
+DFRobotDFPlayerMini myDFPlayer;
 int redLeds[] = {5, 6, 9, 10, 11}; 
 int interval=2000;
-int interval2=20;
+int interval2=30;
 volatile int counter = 0;
 volatile int counter2 = 0;
 volatile int changeValue = 1;
@@ -9,6 +12,7 @@ int ledCounter=1;
 unsigned long previousDelay = 0; 
 long randomNumber;
 bool checkOnce = false;
+bool allowPlay = false;
 unsigned long currentDelay;
 unsigned long lastDebouncetime = 0;
 const unsigned long debounceDelay = 250;
@@ -16,7 +20,17 @@ unsigned long timeNow= 0;
 unsigned long timeNow2 = 0;
 
 void setup() {
-  Serial.begin(115200);
+Serial.begin(9600);
+  mySerial.begin(9600);
+
+  if (!myDFPlayer.begin(mySerial)) {  
+    Serial.println(F("Unable to play the mp3 song."));
+    Serial.println(F("1.Please recheck the connection!"));
+    Serial.println(F("2.Please insert the SD card!"));
+    while(true);
+  }
+  myDFPlayer.volume(25);
+
   randomSeed(analogRead(0));
   delay(500);
   pinMode(5, OUTPUT);
@@ -29,6 +43,7 @@ void setup() {
   pinMode(2, INPUT_PULLUP);
   pinMode(3, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(2), choiceValue, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(3), playMusic, CHANGE);
   digitalWrite(8, LOW);
   digitalWrite(12, HIGH);
 }
@@ -42,6 +57,11 @@ void delayTime()
 void loop() 
 {
   currentDelay = millis();
+  if (allowPlay == true)
+  {
+     myDFPlayer.play(1);
+     allowPlay = false;
+  }
   if (checkOnce == true)
   {
     checkOnce = false;
@@ -194,11 +214,18 @@ void choiceValue()
     
       case 3:
         changeValue=1;
-
         digitalWrite(8, LOW);
         digitalWrite(12, HIGH);
         counter=0;
         break;
     }  
+  }
+}  
+void playMusic()
+{
+  if (millis() - lastDebouncetime > debounceDelay) 
+  {
+     lastDebouncetime = millis();
+     allowPlay = true;
   }
 }
